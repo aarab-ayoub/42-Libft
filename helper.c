@@ -2,8 +2,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define NAME "strrchr"
-#define PROTOTYPE "char *ft_strrchr(const char *s, int c)"
+#define NAME "bzero"
+#define PROTOTYPE "void	ft_bzero(void *s, size_t n)"
 
 int main ()
 {
