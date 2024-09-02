@@ -2,8 +2,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define NAME "strnstr"
-#define PROTOTYPE "char *ft_strnstr(const char *big,	const char *little, size_t len)"
+#define NAME "strdup"
+#define PROTOTYPE "char	*ft_strdup(char *src)"
 
 int main ()
 {

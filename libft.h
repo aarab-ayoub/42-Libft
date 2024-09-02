@@ -30,3 +30,5 @@ void *ft_memchr(void * ptr, int value, size_t num);
 char *ft_strnstr(const char *big,	const char *little, size_t len);
 
 #endif
+void* ft_calloc (size_t num, size_t size);
+char	*ft_strdup(char *src);
