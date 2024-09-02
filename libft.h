@@ -23,8 +23,10 @@ char *ft_strchr(const char *s, int c);
 char *ft_strrchr(const char *s, int c);
 void * ft_memset( void * pointer, int value, size_t count );
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-#endif
 void * ft_memmove( void *destination, const void *source, size_t size);
 int ft_memcmp( const void * pointer1, const void * pointer2, size_t size );
 void	ft_bzero(void *s, size_t n);
+void *ft_memchr(void * ptr, int value, size_t num);
+char *ft_strnstr(const char *big,	const char *little, size_t len);
+
+#endif
