@@ -4,8 +4,9 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdint.h>
 
 int ft_atoi(const char *ptr);
 int ft_isalpha(int c);
@@ -28,7 +29,7 @@ int ft_memcmp( const void * pointer1, const void * pointer2, size_t size );
 void	ft_bzero(void *s, size_t n);
 void *ft_memchr(void * ptr, int value, size_t num);
 char *ft_strnstr(const char *big,	const char *little, size_t len);
-
-#endif
 void* ft_calloc (size_t num, size_t size);
 char	*ft_strdup(char *src);
+
+#endif

@@ -8,6 +8,9 @@ void* ft_calloc (size_t num, size_t size)
 
     i = 0;
     n = num * size;
+    if (num && size && n > SIZE_MAX)
+        return (NULL);
+
     calloc_mem = (char *)malloc(n);
     if (!calloc_mem)
         return (NULL);
