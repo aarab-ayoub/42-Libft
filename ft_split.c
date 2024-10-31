@@ -1,86 +1,103 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/26 12:46:32 by ayaarab           #+#    #+#             */
+/*   Updated: 2024/10/31 16:57:23 by ayaarab          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *copy_word(const char *src, int len)
+int	count_word(char *str, char c)
 {
-    char *word = (char *)malloc((len + 1) * sizeof(char));
-    if (!word)
-        return NULL;
-    ft_memcpy(word, src, len);
-    word[len] = '\0';
-    return word;
+	int	in_word;
+	int	count;
+	int	i;
+
+	in_word = 0;
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			in_word = 0;
+		else if (!in_word)
+		{
+			in_word = 1;
+			count++;
+		}
+		i++;
+	}
+	return (count);
 }
 
-int count_word(const char *str, char c)
+char	*copy_word(char *str, int len)
 {
-    int i = 0;
-    int in_word = 0;
-    int count = 0;
-    while (str[i])
-    {
-        if (str[i] == c)
-            in_word = 0;
-        else if (!in_word)
-        {
-            count++;
-            in_word = 1;
-        }
-        i++;
-    }
-    return count;
+	int		i;
+	char	*dest;
+
+	i = 0;
+	dest = malloc(len + 1);
+	if (!dest)
+		return (NULL);
+	while (i < len)
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
-char **ft_split(char const *s, char c)
+void	free_alloc(char **alloc, int j)
 {
-    int i = 0;
-    int j;
-    int p = 0;
-    int word_count = count_word(s, c);
-    char **alloc_str = (char **)malloc((word_count + 1) * sizeof(char *));
-    
-    if (!alloc_str)
-        return NULL;
-
-    while (s[i])
-    {
-        while (s[i] == c)
-            i++;
-        if (s[i] == '\0')
-            break;
-        j = i;
-        while (s[i] && s[i] != c)
-            i++;
-        int len = i - j;
-        alloc_str[p] = copy_word(&s[j], len);
-        if (!alloc_str[p]) 
-        {
-            while (p > 0)
-                free(alloc_str[--p]);
-            free(alloc_str);
-            return NULL;
-        }
-        p++;
-    }
-    alloc_str[p] = NULL;
-    return alloc_str;
+	while (j >= 0)
+	{
+		free(alloc[j]);
+		j--;
+	}
+	free(alloc);
 }
 
-int main()
+int	find_next_word(char const *str, char c, int *start)
 {
-    char str[] = "       hello\tlkjh\n world    example";
-    char **result = ft_split(str, ' ');
+	size_t	i;
 
-    if (result)
-    {
-        for (int i = 0; result[i] != NULL; i++)
-        {
-            printf("%s\n", result[i]);
-            free(result[i]);
-        }
-        free(result);
-    }
+	i = *start;
+	while (str[i] && str[i] == c)
+		i++;
+	*start = i;
+	while (str[i] && c != str[i])
+		i++;
+	return (i - *start);
+}
 
-    return 0;
+char	**ft_split(char const *s, char c)
+{
+	int		j;
+	int		len;
+	int		start;
+	char	**alloc;
+
+	j = 0;
+	start = 0;
+	alloc = malloc((count_word((char *)s, c) + 1) * sizeof(char *));
+	if (!alloc || !s)
+		return (NULL);
+	while (s[start])
+	{
+		len = find_next_word(s, c, &start);
+		if (len > 0)
+		{
+			alloc[j++] = copy_word((char *)&s[start], len);
+			if (!alloc[j - 1])
+				return (free_alloc(alloc, j - 1), NULL);
+			start += len;
+		}
+	}
+	return (alloc[j] = NULL, alloc);
 }

@@ -1,57 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/26 19:03:35 by ayaarab           #+#    #+#             */
+/*   Updated: 2024/10/31 19:15:53 by ayaarab          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+#include <string.h>
 
-void *ft_memmove(void *destination, const void *source, size_t size)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-    size_t i;
-    unsigned char *dst;
-    unsigned char *src;
-    unsigned int len_dest;
+	size_t	i;
 
-    dst = (unsigned char *)destination;
-    src = (unsigned char *)source;
-    // len_dest = ft_strlen(dst);
-    i = 0;
-    if (dst > src)
-    {
-        while (size-- > 0)
-            dst[size] = src[size];
-    }
-    else
-    {
-        while (i < size)
-        {
-            dst[i] = src[i];
-            i++;
-        }
-    }
-    return dst;
+	i = 0;
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	if (dest > src)
+	{
+		while (len > 0)
+		{
+			((unsigned char *)dest)[len - 1] = ((unsigned char *)src)[len - 1];
+			len--;
+		}
+	}
+	else
+	{
+		while (i < len)
+		{
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
+	}
+	return (dest);
 }
-
-// #define ELEMENT_COUNT 10
-
-// int main()
-// {
-
-//     int data[] = {20, 30, 40, 50, 60, 70, 80, 90, 100, 0};
-
-//     for (int i = 0; i < ELEMENT_COUNT; i++)
-//     {
-//         printf("%d ", data[i]);
-//     }
-//     puts("");
-
-//     void *source = (void *)data;
-//     void *destination = (void *)(data + 1);
-//     size_t size = ELEMENT_COUNT * sizeof(int);
-//     ft_memmove(destination, source, size);
-
-//     data[0] = 10;
-
-//     for (int i = 0; i < ELEMENT_COUNT; i++)
-//     {
-//         printf("%d ", data[i]);
-//     }
-//     puts("");
-
-//     return EXIT_SUCCESS;
-// }
