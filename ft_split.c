@@ -6,13 +6,13 @@
 /*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:46:32 by ayaarab           #+#    #+#             */
-/*   Updated: 2024/10/31 16:57:23 by ayaarab          ###   ########.fr       */
+/*   Updated: 2024/11/02 19:46:44 by ayaarab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_word(char *str, char c)
+static int	count_word(char *str, char c)
 {
 	int	in_word;
 	int	count;
@@ -35,7 +35,7 @@ int	count_word(char *str, char c)
 	return (count);
 }
 
-char	*copy_word(char *str, int len)
+static char	*copy_word(char *str, int len)
 {
 	int		i;
 	char	*dest;
@@ -53,7 +53,7 @@ char	*copy_word(char *str, int len)
 	return (dest);
 }
 
-void	free_alloc(char **alloc, int j)
+static void	free_alloc(char **alloc, int j)
 {
 	while (j >= 0)
 	{
@@ -63,7 +63,7 @@ void	free_alloc(char **alloc, int j)
 	free(alloc);
 }
 
-int	find_next_word(char const *str, char c, int *start)
+static int	find_next_word(char const *str, char c, int *start)
 {
 	size_t	i;
 
@@ -85,8 +85,10 @@ char	**ft_split(char const *s, char c)
 
 	j = 0;
 	start = 0;
+	if (!s)
+		return (NULL);
 	alloc = malloc((count_word((char *)s, c) + 1) * sizeof(char *));
-	if (!alloc || !s)
+	if (!alloc)
 		return (NULL);
 	while (s[start])
 	{

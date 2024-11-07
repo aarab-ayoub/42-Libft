@@ -19,8 +19,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-bonus: $(OBJ) $(OBJB)
-	ar rcs $(NAME) $(OBJ) $(OBJB)
+bonus: $(OBJB)
+	ar rcs $(NAME) $(OBJB)
 
 %.o : %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -31,4 +31,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all bonus
+re: fclean all
+
+.PHONEY : all bonus clean fclean re

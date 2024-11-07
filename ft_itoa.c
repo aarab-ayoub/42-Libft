@@ -6,59 +6,51 @@
 /*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:46:30 by ayaarab           #+#    #+#             */
-/*   Updated: 2024/10/28 19:28:08 by ayaarab          ###   ########.fr       */
+/*   Updated: 2024/11/03 11:28:09 by ayaarab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len_nb(int nb)
+static size_t	nbrlen(int n)
 {
-	int	l;
+	size_t	size;
 
-	l = 0;
-	if (nb < 0)
+	size = 0;
+	if (n < 0)
+		size++;
+	while (n)
 	{
-		nb *= -1;
-		l += 1;
+		n /= 10;
+		size++;
 	}
-	while (nb > 0)
-	{
-		nb /= 10;
-		l++;
-	}
-	return (l);
+	return (size);
 }
 
-char	*ft_itoa(int nbr)
+char	*ft_itoa(int n)
 {
-	long	nb;
-	int		len;
-	char	*place;
-	int		i;
+	size_t	size;
+	char	*res;
 
-	nb = nbr;
-	len = len_nb(nb);
-	place = malloc((len + 1) * sizeof(char));
-	if (place == NULL)
+	if (n == 0)
+		return (ft_strdup("0"));
+	else if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	size = nbrlen(n);
+	res = (char *)malloc((size + 1) * sizeof(char));
+	if (!res)
 		return (NULL);
-	place[len] = '\0';
-	if (nb == 0)
+	if (n < 0)
 	{
-		place[0] = '0';
-		return (place);
+		n = -n;
+		res[0] = '-';
 	}
-	if (nb < 0)
+	res[size] = '\0';
+	while (n)
 	{
-		place[0] = '-';
-		nb *= -1;
+		size--;
+		res[size] = n % 10 + 48;
+		n /= 10;
 	}
-	i = len - 1;
-	while (nb > 0)
-	{
-		place[i] = (nb % 10) + 48;
-		nb /= 10;
-		i--;
-	}
-	return (place);
+	return (res);
 }

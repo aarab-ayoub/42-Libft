@@ -6,7 +6,7 @@
 /*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 12:30:57 by ayaarab           #+#    #+#             */
-/*   Updated: 2024/10/31 11:02:14 by ayaarab          ###   ########.fr       */
+/*   Updated: 2024/11/03 11:07:48 by ayaarab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	mult;
 	char	*dest;
 
-	if (size != 0 && count > SIZE_MAX / size)
+	if (count == 0 || size == 0)
+		return (malloc(0));
+	if (count > SIZE_MAX / size)
 		return (NULL);
 	mult = count * size;
 	dest = malloc(mult);

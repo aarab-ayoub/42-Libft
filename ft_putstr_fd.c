@@ -6,7 +6,7 @@
 /*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:07:38 by ayaarab           #+#    #+#             */
-/*   Updated: 2024/10/30 19:57:57 by ayaarab          ###   ########.fr       */
+/*   Updated: 2024/11/04 12:46:27 by ayaarab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_fd(char *s, int fd)
 	size_t	i;
 
 	i = 0;
-	if (!s || fd < 0)
+	if (!s)
 		return ;
 	while (s[i])
 		write(fd, &s[i++], 1);

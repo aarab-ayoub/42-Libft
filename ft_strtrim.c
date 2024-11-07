@@ -6,13 +6,13 @@
 /*   By: ayaarab <ayaarab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:50:56 by ayaarab           #+#    #+#             */
-/*   Updated: 2024/10/30 19:57:12 by ayaarab          ###   ########.fr       */
+/*   Updated: 2024/10/31 21:11:03 by ayaarab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	set_in(char c, const char *str)
+static int	set_in(char c, const char *str)
 {
 	size_t	i;
 
